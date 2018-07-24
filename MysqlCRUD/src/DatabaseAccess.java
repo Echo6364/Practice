@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DatabaseAccess")
 public class DatabaseAccess extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    // JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+    // JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://192.168.9.82:6446/Practice";
+    static final String DB_URL = "jdbc:mysql://"; //æ­¤å¤„ä¸ºIPåœ°å€
     
-    static final String USER = "root";
-    static final String PASS = "inspur1234,"; 
+    static final String USER = "root"; //è´¦å·
+    static final String PASS = "********"; //å¯†ç 
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,7 +50,7 @@ public class DatabaseAccess extends HttpServlet {
         "<body bgcolor=\"#f0f0f0\">\n" +
         "<h1 align=\"center\">" + title + "</h1>\n");
         try{
-            Class.forName("com.mysql.jdbc.Driver");// ×¢²áÇı¶¯
+            Class.forName("com.mysql.jdbc.Driver");// æ³¨å†Œé©±åŠ¨
             
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
@@ -64,26 +64,26 @@ public class DatabaseAccess extends HttpServlet {
                 String name = rs.getString("prod_name");
                 String price = rs.getString("prod_price");
     
-                // Êä³öÊı¾İ
+                // è¾“å‡ºæ•°æ®
                 out.println("ID: " + id);
-                out.println(", ÉÌÆ·Ãû³Æ: " + name);
-                out.println(", ÉÌÆ·¼Û¸ñ: " + price);
+                out.println(", å•†å“åç§°: " + name);
+                out.println(", å•†å“ä»·æ ¼: " + price);
                 out.println("<br />");
             }
             out.println("</body></html>");
 
-            // Íê³Éºó¹Ø±Õ
+            // å®Œæˆåå…³é—­
             rs.close();
             stmt.close();
             conn.close();
         } catch(SQLException se) {
-            // ´¦Àí JDBC ´íÎó
+            // å¤„ç† JDBC é”™è¯¯
             se.printStackTrace();
         } catch(Exception e) {
-            // ´¦Àí Class.forName ´íÎó
+            // å¤„ç† Class.forName é”™è¯¯
             e.printStackTrace();
         }finally{
-            // ×îºóÊÇÓÃÓÚ¹Ø±Õ×ÊÔ´µÄ¿é
+            // æœ€åæ˜¯ç”¨äºå…³é—­èµ„æºçš„å—
             try{
                 if(stmt!=null)
                 stmt.close();
